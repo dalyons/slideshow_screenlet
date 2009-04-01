@@ -23,6 +23,8 @@ try:
 except:
   print 'Error - Please install python image module'
 import os
+#import re
+#from  urllib import urlopen
 import commands
 import random
 from screenlets import Plugins
@@ -73,6 +75,7 @@ class SlideshowScreenlet (screenlets.Screenlet):
 	crop_to_fit = False
 	recursive = False
 	flickrurl = 'http://www.flickr.com/explore/interesting/7days/'
+	use_higher_quality_flicker = True
 	
 	# --------------------------------------------------------------------------
 	# constructor and internals
@@ -120,6 +123,7 @@ class SlideshowScreenlet (screenlets.Screenlet):
 		self.add_option(BoolOption('SlideShow', 'preserve_aspect', bool(self.preserve_aspect),'Preserve aspect ratio', 'Preserve the aspect ratio when resizing images ,thanks to Mike Peters'))
 		self.add_option(BoolOption('SlideShow', 'center_image', bool(self.center_image),'Center the image', 'Center the image in the canvas, if preserve aspect is on. Thanks to Dave Lyons'))
 		self.add_option(BoolOption('SlideShow', 'crop_to_fit', bool(self.crop_to_fit),'Crop to fit frame', 'Crop the image to fit the frame, sort of like zoom. Overrides preserve_aspect and center_image'))
+		self.add_option(BoolOption('SlideShow', 'use_higher_quality_flicker', bool(self.use_higher_quality_flicker),'Higher quality Flickr', 'Try to use higher quality images from Flickr. May break. By David Lyons'))
 		self.update_interval = self.update_interval
 		self.engine = self.engine
 		self.folders = self.folders
@@ -208,6 +212,12 @@ class SlideshowScreenlet (screenlets.Screenlet):
 		self.img_name =  self.home + "/slide.jpg"
 		random.choice(imgs) 
 		saveto = self.home + "/slide.jpg"
+		
+		if self.use_higher_quality_flicker:
+			#we can make the images higher qual by deleting the _m from the tail of the filename
+			choice = choice.replace('_m.','.')
+			print "using HQ  url: %s " % choice
+		
 		a.save_image(choice,saveto)
 
 		self.img_name =  self.home + "/slide.jpg"	
