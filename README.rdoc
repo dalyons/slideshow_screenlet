@@ -1,16 +1,16 @@
 
-h1. What
+= What
 
 This is an update of v1.1 of the Slideshow screenlet for Gnome/Compiz, originally written by Helder Whise.
 It dramatically improves the image quality, by avoiding re-resizes, and using better resize algorithims. It also adds the ability to center images that have had their aspect ratios preserved. 
 
-h1. Installation
+= Installation
 
-h3. To install for your user: 
+=== To install for your user: 
 
 git clone git://github.com/dalyons/slideshow_screenlet.git ~/.screenlets/Slideshow/
 
-h3. To install for all users:
+=== To install for all users:
 
 sudo git clone git://github.com/dalyons/slideshow_screenlet.git /usr/share/screenlets/Slideshow/
 
