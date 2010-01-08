@@ -9,6 +9,7 @@
 
 #  SlideshowScreenlet (c) Whise <helder.fraga@hotmail.com>
 #  Modifed by David Lyons <dalyons@gmail.com> to add image centering and much better image resizing.
+#  08 Jan 2010 Modified by Ross Adamson <leopard.ross@gmail.com> to add orientation correction based on exif.
 
 
 import screenlets
@@ -39,8 +40,8 @@ class SlideshowScreenlet (screenlets.Screenlet):
 	# --------------------------------------------------------------------------
 	
 	__name__		= 'SlideshowScreenlet'
-	__version__		= '1.2'
-	__author__		= 'Helder Fraga aka Whise(+David Lyons)'
+	__version__		= '1.3'
+	__author__		= 'Helder Fraga aka Whise(+David Lyons+Ross Adamson)'
 	__desc__		= __doc__
 	
 	# attributes
@@ -393,9 +394,30 @@ class SlideshowScreenlet (screenlets.Screenlet):
 			thumb_size = self.calc_thumb_size()
 			thumb_width, thumb_height = thumb_size
 			
-			image = Image.open(filename)
+			original_image = Image.open(filename)
 
-      # Get original image dimensions
+			orientation_code = 0x0112
+
+			exif_info = original_image._getexif()
+			orientation = exif_info.get(orientation_code, 1)
+			
+			if orientation == 1:
+				# correctly oriented
+				flip_degrees = 0	
+			elif orientation == 8:
+				# oriented to the right
+				flip_degrees = 90
+			elif orientation == 6:
+				# oriented to the left
+				flip_degrees = -90
+			else:
+				# other orientations are uncommon
+				flip_degrees = 0
+
+			# orient the image correctly
+			image = original_image.rotate(flip_degrees)
+
+      # Get image dimensions
 			(width, height) = image.size
 
 			#if we are cropping, zoom & crop the picture to exactly the thumb dimensions
