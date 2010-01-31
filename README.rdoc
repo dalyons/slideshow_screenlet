@@ -1,18 +1,27 @@
 
 = What
 
-This is an update of v1.2 (I call it v1.3) of the Slideshow screenlet for Gnome/Compiz, 
-originally written by Helder Whise and modified by David Lyons. 
-It adds automatic rotation of images that are oriented left or right based on
+This is an update of the Slideshow screenlet for Gnome/Compiz, 
+originally written by Helder Whise 
+
+= Features
+
+- It dramatically improves the image quality, by avoiding re-resizes, and using better resize algorithims.
+-  It also adds the ability to center images that have had their aspect ratios preserved.
+- (rizzlesauce) It adds automatic rotation of images that are oriented left or right based on
 the images' exif data.
+
+= New
+
+Merged in git://github.com/rizzlesauce/slideshow_screenlet.git
 
 = Installation
 
 === To install for your user: 
 
-git clone git://github.com/rizzlesauce/slideshow_screenlet.git ~/.screenlets/Slideshow/
+git clone git://github.com/dalyons/slideshow_screenlet.git ~/.screenlets/Slideshow/
 
 === To install for all users:
 
-sudo git clone git://github.com/rizzlesauce/slideshow_screenlet.git /usr/share/screenlets/Slideshow/
+sudo git clone git://github.com/dalyons/slideshow_screenlet.git /usr/share/screenlets/Slideshow/
 
